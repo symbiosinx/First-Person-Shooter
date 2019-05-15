@@ -74,8 +74,6 @@ public class Player : MonoBehaviour {
 			Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 90f, 110f);
 		}
 
-
-
 		controller.Move(motion * Time.deltaTime);
 	}
 }
