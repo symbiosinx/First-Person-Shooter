@@ -18,10 +18,7 @@ public class Player : MonoBehaviour {
 	float speed;
 
 	bool isRunning = false;
-	bool isAiming = false;
 	bool isGrounded = true;
-
-	public Transform elbow;
 
 	void Start() {
 		
@@ -52,26 +49,16 @@ public class Player : MonoBehaviour {
 			motion.y += gravity * Time.deltaTime;
 		}
 
-		//isAiming = (Input.GetKey(KeyCode.Mouse1));
-		isRunning = (!isAiming) && ((Input.GetKey(KeyCode.LeftShift) && inputV > 0f) || (isRunning && !isGrounded));
-
-		/*if (isAiming) {
-			Camera.main.fieldOfView -= 200 * Time.deltaTime;
-			Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 70f, 90f);
-
-		} else if (!isRunning) {
-			Camera.main.fieldOfView += 200 * Time.deltaTime;
-			Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 70f, 90f);
-		}*/
+		isRunning = (Input.GetKey(KeyCode.LeftShift) && inputV > 0f) || (isRunning && !isGrounded);
 
 		if (isRunning) {
 			speed = runSpeed;
 			Camera.main.fieldOfView += 100 * Time.deltaTime;
-			Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 90f, 110f);
-		} else if (!isAiming) {
+			Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, FOVmin, FOVmax);
+		} else {
 			speed = walkSpeed;
 			Camera.main.fieldOfView -= 100 * Time.deltaTime;
-			Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 90f, 110f);
+			Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, FOVmin, FOVmax);
 		}
 
 
