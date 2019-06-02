@@ -61,8 +61,6 @@ public class Player : MonoBehaviour {
 			Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, FOVmin, FOVmax);
 		}
 
-
-
 		controller.Move(motion * Time.deltaTime);
 	}
 }
