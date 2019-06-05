@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-	public float speed = 10f;
+	public float damage = 1f;
+	public float speed = 100f;
 	public GameObject effectsPrefab;
 	public Transform line;
 
@@ -23,6 +24,10 @@ public class Bullet : MonoBehaviour {
 	void OnCollisionEnter(Collision col) {
 		ContactPoint contact = col.contacts[0];
 		//Instantiate(effectsPrefab, contact.point, Quaternion.LookRotation(contact.normal));
+		Enemy enemy = col.collider.GetComponent<Enemy>();
+		if (enemy) {
+			enemy.TakeDamage(damage);
+		}
 		Destroy(gameObject);
 	}
 

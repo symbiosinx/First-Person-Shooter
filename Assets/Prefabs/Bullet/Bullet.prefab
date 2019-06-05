@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 087237f4f578b2b46a0f664ebcb46502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 50
   effectsPrefab: {fileID: 0}
   line: {fileID: 6331495726316608072}
 --- !u!1 &6331495726316608075

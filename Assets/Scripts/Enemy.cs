@@ -1,18 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.UI;
 public class Enemy : MonoBehaviour {
 
-	public Transform target;
+	public float maxHealth = 100f;
+	public GameObject healthBarUIPrefab;
+	public Transform healthBarParent;
+	public Transform healthBarPoint;
 
-	NavMeshAgent agent;
+	float health = 0;
+	Slider healthSlider;
+	Renderer rend;
 
 	void Start() {
-		agent = GetComponent<NavMeshAgent>();
+		health = maxHealth;
+		GameObject clone = Instantiate(healthBarUIPrefab, healthBarParent);
+		healthSlider = clone.GetComponent<Slider>();
+		rend = GetComponent<Renderer>();
+
 	}
 
-	void Update() {
-		agent.SetDestination(target.position);
+	void OnDestroy() {
+		if (healthSlider) {
+			Destroy(healthSlider.gameObject);
+		}
+	}
+
+	void LateUpdate() {
+		if (rend.isVisible) {
+			healthSlider.gameObject.SetActive(true);
+			Vector3 screenPosition = Camera.main.WorldToScreenPoint(healthBarPoint.position);
+			healthSlider.transform.position = screenPosition;
+		} else {
+			healthSlider.gameObject.SetActive(false);
+		}
+	}
+
+	public void TakeDamage(float damage) {
+		health -= damage;
+		healthSlider.value = health / maxHealth;
+		if (health < 0f) {
+			Destroy(gameObject);
+		}
 	}
 }

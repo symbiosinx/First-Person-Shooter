@@ -13,7 +13,7 @@ public class Shooting : MonoBehaviour {
 
 	void Update() {
 		if (currentWeapon) {
-			if (Input.GetButtonDown("Fire1")) {
+			if (Input.GetButton("Fire1")) {
 				if (currentWeapon.canShoot) {
 					currentWeapon.Shoot();
 				}
